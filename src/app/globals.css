@@ -1,26 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #f3f4f8;
+    --surface-white: #ffffff;
+    --surface-lavender: #f9f8ff;
+    --surface-muted: #f8fafc;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --brand-primary: #7c3aed;
+    --brand-primary-light: #ede9fe;
+    --brand-primary-dark: #6d28d9;
+    --brand-secondary-blue: #2563eb;
+    --brand-secondary-pink: #fce7f3;
+    --brand-accent-amber: #fbbf24;
+    --border-light: rgba(226, 232, 240, 0.8);
+    --border-purple: rgba(124, 58, 237, 0.2);
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: var(--text-primary);
+  background-color: var(--background);
+  overflow-x: hidden;
+}
+
+/* Custom Selection Highlight */
+::selection {
+  background-color: #ede9fe;
+  color: #6d28d9;
+}
+
+/* Typography Hierarchy Utilities */
+.text-display {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.text-h1 {
+  font-size: clamp(1.875rem, 4vw, 2.75rem);
+  line-height: 1.18;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.text-h2 {
+  font-size: clamp(1.5rem, 3vw, 2.125rem);
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.text-h3 {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.text-body-lead {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #475569;
+}
+
+.text-body-base {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #475569;
+}
+
+.text-small-ui {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.text-button-label {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.text-caption-badge {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+/* Micro & Ambient Keyframe Animations */
+@keyframes gentle-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes gentle-float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-13px) rotate(-1.5deg);
+  }
+}
+
+@keyframes gentle-float-fast {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(1deg);
+  }
+}
+
+@keyframes gentle-float-reverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(9px) rotate(-1deg);
+  }
+}
+
+@keyframes soft-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.84;
+    transform: scale(0.975);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-float {
+  animation: gentle-float 4.8s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: gentle-float-slow 6.8s ease-in-out infinite;
+}
+
+.animate-float-fast {
+  animation: gentle-float-fast 3.6s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: gentle-float-reverse 5.4s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: gentle-float 5.2s ease-in-out 1.2s infinite;
+}
+
+.animate-pulse-soft {
+  animation: soft-pulse 4.2s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 24s linear infinite;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 35s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Decorative Global Background Grid & Dots */
+.bg-grid-dots {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.22) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.frosted-glass-nav {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
